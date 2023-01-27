@@ -1,26 +1,27 @@
 #ifndef MainView_H
 #define MainView_H
 
-#include <QtWidgets>
-#include <QLineSeries>
 #include <QChartView>
+#include <QLineSeries>
+#include <QtWidgets>
 
-class MainView : public QBoxLayout {
+class MainView : public QBoxLayout
+{
     Q_OBJECT
 
-public:
-
+  public:
     using openFileCallback_t = std::function<void(void)>;
 
-    MainView():QBoxLayout(QBoxLayout::Direction::TopToBottom) {
+    MainView()
+        : QBoxLayout(QBoxLayout::Direction::TopToBottom)
+    {
         createUI();
     }
 
-    void setOpenFileCallback(const openFileCallback_t& callback) {
-        openFileCallback = callback;
-    }
+    void setOpenFileCallback(const openFileCallback_t& callback) { openFileCallback = callback; }
 
-    void update(const std::vector<QLineSeries*>& series) {
+    void update(const std::vector<QLineSeries*>& series)
+    {
         QChart* c = chartView->chart();
         c->removeAllSeries();
         for (auto s : series) {
@@ -28,18 +29,16 @@ public:
         }
     }
 
-private slots:
+  private slots:
 
-    void openFileClicked() {
-        openFileCallback();
-    }
+    void openFileClicked() { openFileCallback(); }
 
-private:
+  private:
+    QChartView* chartView{ nullptr };
+    openFileCallback_t openFileCallback{ nullptr };
 
-    QChartView* chartView { nullptr };
-    openFileCallback_t openFileCallback { nullptr };
-
-    void createUI() {
+    void createUI()
+    {
         QPushButton* button = new QPushButton("Open file");
         connect(button, SIGNAL(clicked()), this, SLOT(openFileClicked()));
 
@@ -56,6 +55,5 @@ private:
         this->addWidget(button);
     }
 };
-
 
 #endif

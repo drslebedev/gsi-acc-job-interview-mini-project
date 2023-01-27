@@ -1,8 +1,8 @@
 #ifndef RollingAverage_H
 #define RollingAverage_H
 
-
-std::vector<double> makeRollingAverage(const std::vector<double>& inVec, int windowSize = 100 ) {
+std::vector<double> makeRollingAverage(const std::vector<double>& inVec, int windowSize = 100)
+{
     int count = 0;
     double sum = 0;
     std::vector<double> outVec;
@@ -13,12 +13,11 @@ std::vector<double> makeRollingAverage(const std::vector<double>& inVec, int win
             count++;
             outVec[i] = sum / count;
             continue;
-        } 
+        }
         sum -= std::abs(inVec[i - windowSize]);
         outVec[i] = sum / count;
     }
     return outVec;
 }
-
 
 #endif

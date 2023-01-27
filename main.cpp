@@ -1,17 +1,16 @@
 #include <iostream>
 
-#include <QApplication>
 #include "MainViewController.h"
+#include <QApplication>
 
-
-int main (int argc, char **argv)
+int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
     auto mainView = new MainView();
     MainViewController viewController;
     viewController.setView(mainView);
-    
+
     QWidget* mainWindow = new QWidget;
     mainWindow->setLayout(mainView);
     mainWindow->resize(1000, 600);
